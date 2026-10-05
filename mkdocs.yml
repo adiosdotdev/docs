@@ -2,7 +2,7 @@ INHERIT: docs/nav.yml
 site_name: Adios documentation
 site_description: User guides and API reference for the Adios platform.
 copyright: >-
-  <a href="https://github.com/adiosdotdev/docs/blob/main/LICENSE">Docs: CC BY 4.0 · Code and API files: MIT</a>
+  <a href="https://github.com/adiosdotdev/docs/blob/main/LICENSE">© 2026 Adios Global LLC · Documentation: MIT</a>
 site_url: !ENV [READTHEDOCS_CANONICAL_URL, "https://adios.dev/docs/"]
 docs_dir: docs/content
 site_dir: output/docs/site
