@@ -1,0 +1,394 @@
+{
+  "info": {
+    "_postman_id": "c50e1b83-ff98-53e9-8f1b-4be4c3626c23",
+    "name": "Adios.dev API — Quick start",
+    "description": "# Adios.dev API\n\nDeploy and operate applications, work with source-backed workspaces, manage\ndomains and object storage, and inspect AI agent sessions through the Adios API.\n\nThis collection documents the core customer-facing API. It includes editable\nrequest bodies, resource variables, pagination controls, and illustrative\nresponses. It is a curated reference, not a dump of every platform route.\n\n## Get started\n\n1. Create an account at [Adios.dev](https://adios.dev) and sign in to the\n   [Adios app](https://app.adios.dev).\n2. Fork this collection into your own workspace. Import the supplied Production\n   environment, or create a private environment containing `base_url`,\n   `access_token`, and `team_id`.\n3. Set `base_url` to `https://api.adios.dev` without a trailing slash.\n4. Obtain a bearer token as described below and set `access_token` in your\n   private environment. Set `team_id` to the same team selected in your CLI.\n5. Send **Check API health**, then **Get current user**. The latter saves your\n   `user_id` in the selected environment. Choose **List workloads** to inspect\n   your team's applications.\n\nThe companion **Adios.dev API — Quick start** collection contains five read-only\nrequests that can be run in order. Send requests in the core reference\nindividually: it contains creates, updates, deletes, email invitations, and\nruntime operations.\n\n## Authentication\n\nProtected requests inherit `Authorization: Bearer {{access_token}}` from the\ncollection. Team-scoped requests send `X-Tenant-ID: {{team_id}}`.\n\nFor manual API access, a **team administrator** can use the supported CLI\ndiagnostic-token flow:\n\n```sh\nadios login\nadios teams\nadios teams switch YOUR_TEAM_ID\nadios auth print-token --ttl 15m\n```\n\nInstall the CLI on macOS or Linux with `brew install adiosdotdev/tap/adios`.\nCopy the printed token into your private Postman environment. Diagnostic tokens\nexpire after 1–15 minutes (the command above requests 15 minutes), cannot be\nrefreshed, and remain bound to the selected team. Mint a new token when it expires.\nAccount and team permissions still apply to every request.\n\nThe password grant is disabled and password login requires signed requests.\nThis REST collection does not offer a password-based or one-click Postman OAuth\nlogin. Postman's native MCP integration uses a separate, MCP-scoped OAuth flow\nwhose tokens cannot call general REST routes. Raw CLI tokens are DPoP-bound\nand cannot simply be pasted into Bearer auth; use `adios auth print-token`.\nNon-admin users need an authorized bearer credential compatible with their\ndeployment; this collection does not provision one.\n\nKeep tokens in your private fork/environment. Leave shared values empty and\nnever publish authenticated response captures or environments containing tokens.\nPublic health and plan-catalog requests explicitly use **No Auth**.\n\n## Using the reference\n\n- Copy IDs returned by list/create requests into the corresponding environment\n  variables, such as `workload_id`, `workspace_id`, or `object_bucket_id`.\n  The collection never selects a team or target resource automatically.\n- Set `region` from **Get deployment context**, `hostname` to a domain you own,\n  and `bucket_name` to a globally unique name before using those examples.\n- Optional query parameters appear disabled. Enable the ones you need.\n  Generated list routes support `page` (default 1) and `per_page` (default 20,\n  maximum 100), with results in `data` and pagination metadata in `pagination`.\n- Request descriptions list available fields for generated CRUD operations.\n  Replace example values and review resource configuration before sending.\n- Bucket uploads use **Body → binary**. Select a local file; do not send a\n  multipart form. Downloads can return arbitrary content types.\n- Build, deploy, preview, and workflow operations may consume paid resources or\n  perform configured external actions. Workspace file/tree reads can hydrate\n  source. Runtime actions can require an active subscription.\n- Saved response examples are synthetic illustrations derived from the schema,\n  not captures from production. Custom routes without a complete response\n  contract omit examples rather than presenting an invented payload.\n\n## Responses and troubleshooting\n\nSuccessful requests return a 2xx status. The collection checks this after each\nrequest. A failed assertion indicates a response to investigate; it does not\nvalidate the entire response schema or prove that a deployment became healthy.\n\n| Status | What to check |\n| --- | --- |\n| 400 | Required values, request body, IDs, and `X-Tenant-ID`. |\n| 401 | Missing, expired, or incompatible bearer token. |\n| 402 | Subscription or resource entitlement required for the operation. |\n| 403 | Team membership, role, resource permission, or token/team mismatch. |\n| 404 | Resource ID and active team. |\n| 409 | Conflicting resource state or operation. |\n| 429 | Wait before retrying; honor `Retry-After` when present. |\n| 5xx | Service availability; retain the response for private troubleshooting. |\n\n## Coverage\n\nThe core reference covers teams and invitations; workloads, builds, and runtime\nstatus; workspaces, files, previews, and commands; workspace sources and source\nartifact reads; workflows; domains; object buckets, objects, and access keys;\ngateway routes and security profiles; agent sessions and read-only run/message/\nplan/event records; feature planning; webhook configuration; AI model settings;\nbilling reads; and authorized OAuth connections.\n\nPlatform administration, service-to-service credentials, provider callbacks,\nbrowser account flows, internal accounting/execution ledgers,\nand advanced agent-catalog/automation operations are outside this edition.\nThe API specification can contain more routes than this curated reference.\n\nFor MCP, use the companion **Adios.dev MCP — Public discovery** collection and\nthe native MCP HTTP or STDIO connection configurations. The hosted endpoint is\n`https://api.adios.dev/v1/mcp`; native MCP setup and its OAuth requirements are\ndocumented separately from the REST collection.\n\nProduct information: [adios.dev](https://adios.dev).\n\nThis collection contains five read-only requests. After setting access_token and team_id, run them in order to check your setup. The core reference contains the mutation examples.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test('Response is successful (2xx)', function () {",
+          "  pm.expect(pm.response.code).to.be.within(200, 299);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "id": "207e12b7-5e00-5990-ac1b-f694cb3330bc",
+      "name": "Check API health",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "health"
+          ]
+        },
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "Check whether the API process is responding."
+      },
+      "response": [
+        {
+          "id": "894f7d59-8a3b-5305-bdec-0562cf0124e7",
+          "name": "Illustrative success (not a live response)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "health"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"status\": \"ok\"\n}"
+        }
+      ]
+    },
+    {
+      "id": "62ee2193-db68-551d-a811-5d5c3b59d0a6",
+      "name": "Get current user",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{team_id}}",
+            "description": "Active team ID. Must match the tenant bound to a diagnostic token."
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/auth/me",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "auth",
+            "me"
+          ]
+        },
+        "description": "Return your user_id, profile, teams, and team_data. The response script saves only user_id in the selected environment. Set team_id yourself to the active CLI team before using a diagnostic token."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 200 && pm.environment.name) {",
+              "  const data = pm.response.json();",
+              "  if (typeof data.user_id === 'string' && data.user_id) {",
+              "    pm.environment.set('user_id', data.user_id);",
+              "  }",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "d1b5e4ca-77e3-5bb4-aa5a-ada88b28f263",
+      "name": "List teams",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{team_id}}",
+            "description": "Active team ID. Must match the tenant bound to a diagnostic token."
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/team",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "team"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "description": "Page number",
+              "disabled": true
+            },
+            {
+              "key": "per_page",
+              "value": "20",
+              "description": "Items per page",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Returns a paginated list of Team"
+      },
+      "response": [
+        {
+          "id": "9950881c-379c-5318-8c39-24076012fc7b",
+          "name": "Illustrative success (not a live response)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{team_id}}",
+                "description": "Active team ID. Must match the tenant bound to a diagnostic token."
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/team",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "team"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number",
+                  "disabled": true
+                },
+                {
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Items per page",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"data\": [\n    {\n      \"created_at\": 1791072000,\n      \"deleted_at\": 0,\n      \"description\": \"\",\n      \"owner_id\": \"000000000000000000000000001\",\n      \"parent_id\": \"000000000000000000000000001\",\n      \"status\": \"active\",\n      \"team_id\": \"000000000000000000000000001\",\n      \"title\": \"Postman example\",\n      \"updated_at\": 1791072000\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"per_page\": 1,\n    \"total\": 1\n  }\n}"
+        }
+      ]
+    },
+    {
+      "id": "15253843-df5f-5f6b-beb9-8a113c79bb32",
+      "name": "Get deployment context",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{team_id}}",
+            "description": "Active team ID. Must match the tenant bound to a diagnostic token."
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/team/deployment-context",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "team",
+            "deployment-context"
+          ]
+        },
+        "description": "Discover available deployment regions and the active team deployment context."
+      },
+      "response": []
+    },
+    {
+      "id": "cdbac455-3ce1-5840-91d4-67d0a9f61c98",
+      "name": "List workloads",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Tenant-ID",
+            "value": "{{team_id}}",
+            "description": "Active team ID. Must match the tenant bound to a diagnostic token."
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/workload",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "workload"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "description": "Page number",
+              "disabled": true
+            },
+            {
+              "key": "per_page",
+              "value": "20",
+              "description": "Items per page",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Returns a paginated list of Workload"
+      },
+      "response": [
+        {
+          "id": "2c19317c-74ae-51b9-9348-33ad6f07bdb8",
+          "name": "Illustrative success (not a live response)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{team_id}}",
+                "description": "Active team ID. Must match the tenant bound to a diagnostic token."
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/workload",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "workload"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number",
+                  "disabled": true
+                },
+                {
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Items per page",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"data\": [\n    {\n      \"allow_default_domain\": true,\n      \"branch\": \"main\",\n      \"build_id\": \"example\",\n      \"config\": {},\n      \"created_at\": 1791072000,\n      \"current_source_artifact_id\": \"\",\n      \"deleted_at\": 0,\n      \"domain\": \"example\",\n      \"env_vars\": {},\n      \"image\": \"example\",\n      \"name\": \"postman-example\",\n      \"node_id\": \"000000000000000000000000001\",\n      \"parent_id\": \"000000000000000000000000001\",\n      \"port\": 8080,\n      \"region\": \"default\",\n      \"repository_url\": \"example\",\n      \"requires\": {},\n      \"resources\": {},\n      \"status\": \"provisioning\",\n      \"team_id\": \"000000000000000000000000001\",\n      \"template\": \"example\",\n      \"type\": \"api\",\n      \"updated_at\": 1791072000,\n      \"variant\": \"\",\n      \"version\": \"example\",\n      \"volumes\": {},\n      \"workload_id\": \"000000000000000000000000001\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1,\n    \"per_page\": 1,\n    \"total\": 1\n  }\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.adios.dev",
+      "type": "string",
+      "description": "API origin without a trailing slash; paths already include /v1."
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": "Private bearer token. Team admins can use adios auth print-token --ttl 15m after adios login. Never share this value."
+    },
+    {
+      "key": "team_id",
+      "value": "",
+      "type": "string",
+      "description": "Active CLI team ID, sent as X-Tenant-ID. Use adios teams to inspect teams."
+    }
+  ]
+}

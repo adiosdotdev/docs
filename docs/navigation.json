@@ -1,0 +1,572 @@
+{
+  "pages": [
+    {
+      "path": "index.md",
+      "route": "/docs",
+      "title": "Adios Documentation",
+      "description": "Adios documentation for AI coding workspaces, adios.yaml manifests, templates, deployments, workspaces, workflows, routing, and managed services.",
+      "navTitle": "Introduction"
+    },
+    {
+      "path": "architecture.md",
+      "route": "/docs/architecture",
+      "title": "Adios Architecture: Source, Releases, and Routes",
+      "description": "Understand how Adios connects source, workspaces, builds, versions, replicas, routes, managed services, and Git across preview and production.",
+      "navTitle": "Architecture"
+    },
+    {
+      "path": "cli.md",
+      "route": "/docs/cli",
+      "title": "Adios CLI Reference",
+      "description": "Use the Adios CLI to authenticate, deploy apps, inspect build and runtime logs, manage resources, sync workspaces, configure domains, and handle secrets.",
+      "navTitle": "CLI commands"
+    },
+    {
+      "path": "installation.md",
+      "route": "/docs/installation",
+      "title": "Install the Adios CLI",
+      "description": "Install the Adios CLI on your development machine, verify the version, authenticate your account, and confirm the first safe command before deployment.",
+      "navTitle": "Installation"
+    },
+    {
+      "path": "manifest.md",
+      "route": "/docs/manifest",
+      "title": "adios.yaml Manifest Reference",
+      "description": "Reference adios.yaml fields for app runtimes, build and start commands, managed resources, secrets, routing, workspace source, replicas, and health checks.",
+      "navTitle": "adios.yaml"
+    },
+    {
+      "path": "managed-resources.md",
+      "route": "/docs/managed-resources",
+      "title": "Managed Resources and Versioned Internal DNS",
+      "description": "Connect applications to the promoted current or an exact healthy Postgres, MySQL, MongoDB, Redis, or RabbitMQ version with private svc.internal DNS.",
+      "navTitle": "Managed resources and DNS"
+    },
+    {
+      "path": "private-git-dependencies.md",
+      "route": "/docs/private-git-dependencies",
+      "title": "Use Private Git Dependencies in Adios Builds",
+      "description": "Create a read-only deploy key, store its private half in Adios Secret Manager, configure build.ssh and GOPRIVATE, and troubleshoot private Git dependency builds.",
+      "navTitle": "Private Git dependencies"
+    },
+    {
+      "path": "quickstart.md",
+      "route": "/docs/quickstart",
+      "title": "Adios Quickstart: Deploy an Existing App",
+      "description": "Deploy an existing app with adios.yaml and adios up, inspect build and runtime logs, verify the healthy route, and continue in a source-backed workspace.",
+      "navTitle": "Deploy your first app"
+    },
+    {
+      "path": "routing.md",
+      "route": "/docs/routing",
+      "title": "Adios Routing, Custom Domains, and TLS",
+      "description": "Configure generated routes, verified custom domains, managed TLS, whole-host redirects, health-aware release routing, and canonical host behavior in Adios.",
+      "navTitle": "Domains and routing"
+    },
+    {
+      "path": "templates.md",
+      "route": "/docs/templates",
+      "title": "Adios Template Deployment Guide",
+      "description": "Choose an Adios app, API, database, cache, or queue template, inspect the exact variant, deploy in the console, or clone locally and run adios up.",
+      "navTitle": "Templates"
+    },
+    {
+      "path": "workflows.md",
+      "route": "/docs/workflows",
+      "title": "Adios Workflows Reference",
+      "description": "Define Adios workflow triggers, ordered steps, dependencies, waits, approvals, secret references, inputs, outputs, errors, and inspectable run history.",
+      "navTitle": "Workflows"
+    },
+    {
+      "path": "workspaces.md",
+      "route": "/docs/workspaces",
+      "title": "Adios AI Coding Workspaces",
+      "description": "Use source-backed Adios workspaces for AI-assisted file changes, Git operations, commands, builds, previews, logs, secrets, resources, and deployment review.",
+      "navTitle": "Workspaces"
+    },
+    {
+      "path": "examples/dotnet.md",
+      "route": "/docs/examples/dotnet",
+      "title": "Deploy .NET Apps with Adios",
+      "description": "Publish and deploy an ASP.NET Core or .NET app with the correct build artifact, runtime command, port, health path, logs, and adios.yaml configuration.",
+      "navTitle": ".NET"
+    },
+    {
+      "path": "examples/go.md",
+      "route": "/docs/examples/go",
+      "title": "Deploy Go Apps with Adios",
+      "description": "Compile and deploy a Go service as a production binary with an explicit build command, start command, port, health endpoint, logs, and adios.yaml file.",
+      "navTitle": "Go"
+    },
+    {
+      "path": "examples/mongodb.md",
+      "route": "/docs/examples/mongodb",
+      "title": "Deploy MongoDB with Adios",
+      "description": "Deploy MongoDB with persistent storage and application credentials, connect it to a workload, then verify write, restart, and read behavior without raw secrets.",
+      "navTitle": "MongoDB"
+    },
+    {
+      "path": "examples/mysql.md",
+      "route": "/docs/examples/mysql",
+      "title": "Deploy MySQL with Adios",
+      "description": "Deploy MySQL with separate root and application credentials, persistent storage, connection details, and a restart test that verifies durable data.",
+      "navTitle": "MySQL"
+    },
+    {
+      "path": "examples/nextjs.md",
+      "route": "/docs/examples/nextjs",
+      "title": "Deploy Next.js with Adios",
+      "description": "Deploy a Next.js app with npm or pnpm, a persistent Node.js runtime, server rendering, API routes, an explicit health path, and canonical adios.yaml config.",
+      "navTitle": "Next.js"
+    },
+    {
+      "path": "examples/postgres.md",
+      "route": "/docs/examples/postgres",
+      "title": "Deploy PostgreSQL with Adios",
+      "description": "Deploy persistent PostgreSQL, keep its password in secret storage, connect an application safely, and verify data survives a restart before production use.",
+      "navTitle": "PostgreSQL"
+    },
+    {
+      "path": "examples/python.md",
+      "route": "/docs/examples/python",
+      "title": "Deploy Python Apps with Adios",
+      "description": "Deploy FastAPI, Flask, or another Python web app with a production process, supported runtime, secret-backed configuration, health endpoint, and logs.",
+      "navTitle": "Python"
+    },
+    {
+      "path": "examples/rabbitmq.md",
+      "route": "/docs/examples/rabbitmq",
+      "title": "Deploy RabbitMQ with Adios",
+      "description": "Deploy RabbitMQ with broker credentials, management access, persistent storage, and a publish-and-consume check that verifies the queue works after launch.",
+      "navTitle": "RabbitMQ"
+    },
+    {
+      "path": "examples/redis.md",
+      "route": "/docs/examples/redis",
+      "title": "Deploy Redis with Adios",
+      "description": "Deploy Redis for caching, sessions, or pub/sub, choose the intended persistence behavior, connect an application, and test set, get, and restart behavior.",
+      "navTitle": "Redis"
+    },
+    {
+      "path": "examples/ruby.md",
+      "route": "/docs/examples/ruby",
+      "title": "Deploy Ruby Apps with Adios",
+      "description": "Deploy Sinatra, Rails, or another Ruby web process with Bundler, a framework-appropriate production command, explicit port, health check, secrets, and logs.",
+      "navTitle": "Ruby"
+    },
+    {
+      "path": "guides/dotnet-redis-crypto-ticker.md",
+      "route": "/docs/guides/dotnet-redis-crypto-ticker",
+      "title": "Deploy a .NET Redis Crypto Ticker",
+      "description": "Build and deploy a .NET API with a background polling loop, Redis-backed current prices, health checks, production commands, and dependency failure behavior.",
+      "navTitle": ".NET crypto ticker"
+    },
+    {
+      "path": "guides/global-webhook-processor-go.md",
+      "route": "/docs/guides/global-webhook-processor-go",
+      "title": "Deploy a Go Webhook Processor",
+      "description": "Build and deploy a Go webhook receiver with signature verification, persistent event writes, a health endpoint, production config, failure tests, and logs.",
+      "navTitle": "Go webhook processor"
+    },
+    {
+      "path": "guides/php-markdown-docs-edge-cache.md",
+      "route": "/docs/guides/php-markdown-docs-edge-cache",
+      "title": "Deploy a PHP Markdown Docs Site with Edge Cache",
+      "description": "Build and deploy a PHP documentation site with Markdown, MySQL, explicit health and cache headers, secret-backed config, request checks, and log inspection.",
+      "navTitle": "PHP edge docs"
+    },
+    {
+      "path": "guides/realtime-analytics-node-redis-mongodb.md",
+      "route": "/docs/guides/realtime-analytics-node-redis-mongodb",
+      "title": "Deploy Realtime Analytics with Node, Redis, and MongoDB",
+      "description": "Build and deploy a realtime Node.js analytics service with Redis live state, MongoDB history, WebSockets, health checks, persistent processes, and logs.",
+      "navTitle": "Node analytics"
+    },
+    {
+      "path": "guides/semantic-search-fastapi-pgvector.md",
+      "route": "/docs/guides/semantic-search-fastapi-pgvector",
+      "title": "Deploy FastAPI Semantic Search with pgvector",
+      "description": "Build and deploy FastAPI semantic search with pgvector storage, embeddings, ingestion and query routes, secret-backed config, health checks, and verification.",
+      "navTitle": "FastAPI semantic search"
+    },
+    {
+      "path": "accounts.md",
+      "route": "/docs/accounts",
+      "title": "Accounts and teams",
+      "description": "Account setup, team selection, invitations, and permissions in Adios.",
+      "navTitle": "Accounts and teams"
+    },
+    {
+      "path": "ai.md",
+      "route": "/docs/ai",
+      "title": "Working with the AI agent",
+      "description": "Choose models and provider connections, review agent changes, manage background work, and inspect usage.",
+      "navTitle": "AI agent"
+    },
+    {
+      "path": "deployments.md",
+      "route": "/docs/deployments",
+      "title": "Deployments and releases",
+      "description": "Build and deploy source, inspect release health, and configure projects, regions, and replicas.",
+      "navTitle": "Deployments and releases"
+    },
+    {
+      "path": "secrets.md",
+      "route": "/docs/secrets",
+      "title": "Secrets and configuration",
+      "description": "Store team secrets and reference private values in runtime and build configuration.",
+      "navTitle": "Secrets and configuration"
+    },
+    {
+      "path": "storage.md",
+      "route": "/docs/storage",
+      "title": "Storage, volumes, and backups",
+      "description": "Use S3 buckets, persistent volumes, backups, and build artifacts in Adios.",
+      "navTitle": "Storage, volumes, and backups"
+    },
+    {
+      "path": "observability.md",
+      "route": "/docs/observability",
+      "title": "Logs, metrics, and troubleshooting",
+      "description": "Inspect build and runtime logs, diagnose failed deployments, and interpret workload telemetry.",
+      "navTitle": "Logs and troubleshooting"
+    },
+    {
+      "path": "billing.md",
+      "route": "/docs/billing",
+      "title": "Billing and usage",
+      "description": "Review team subscriptions, managed AI funding, BYOK usage, and resource lifecycle.",
+      "navTitle": "Billing and usage"
+    },
+    {
+      "path": "integrations.md",
+      "route": "/docs/integrations",
+      "title": "MCP and integrations",
+      "description": "Connect an AI client to the hosted Adios MCP server and manage authorized connections.",
+      "navTitle": "MCP and integrations"
+    },
+    {
+      "path": "api/index.md",
+      "route": "/docs/api",
+      "title": "Adios API",
+      "description": "REST API overview, public OpenAPI download, Postman collections, and endpoint scope.",
+      "navTitle": "API overview"
+    },
+    {
+      "path": "api/authentication.md",
+      "route": "/docs/api/authentication",
+      "title": "API authentication",
+      "description": "Obtain a supported team-bound bearer token and send the correct REST tenant header.",
+      "navTitle": "Authentication"
+    },
+    {
+      "path": "api/quickstart.md",
+      "route": "/docs/api/quickstart",
+      "title": "Your first API requests",
+      "description": "Verify API health, your identity, workload listings, and deployment context with curl.",
+      "navTitle": "First API requests"
+    },
+    {
+      "path": "api/postman.md",
+      "route": "/docs/api/postman",
+      "title": "Use Postman",
+      "description": "Import the public Adios REST collections and private environment, then run the read-only quickstart.",
+      "navTitle": "Postman"
+    },
+    {
+      "path": "api/errors.md",
+      "route": "/docs/api/errors",
+      "title": "API errors and pagination",
+      "description": "Interpret HTTP statuses, paginate lists, and verify asynchronous API operations.",
+      "navTitle": "Errors and pagination"
+    },
+    {
+      "path": "guides/index.md",
+      "route": "/docs/guides",
+      "title": "Application guides",
+      "description": "Practical application deployment guides using Adios runtimes and managed services.",
+      "navTitle": "Guide index"
+    },
+    {
+      "path": "api/teams.md",
+      "route": "/docs/api/teams",
+      "title": "Teams API",
+      "navTitle": "Teams",
+      "description": "Adios API reference for teams: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/workloads.md",
+      "route": "/docs/api/workloads",
+      "title": "Workloads API",
+      "navTitle": "Workloads",
+      "description": "Adios API reference for workloads: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/workspaces.md",
+      "route": "/docs/api/workspaces",
+      "title": "Workspaces API",
+      "navTitle": "Workspaces",
+      "description": "Adios API reference for workspaces: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/workspace-sources.md",
+      "route": "/docs/api/workspace-sources",
+      "title": "Workspace sources API",
+      "navTitle": "Workspace sources",
+      "description": "Adios API reference for workspace sources: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/source-artifacts.md",
+      "route": "/docs/api/source-artifacts",
+      "title": "Source artifacts API",
+      "navTitle": "Source artifacts",
+      "description": "Adios API reference for source artifacts: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/workflows.md",
+      "route": "/docs/api/workflows",
+      "title": "Workflows API",
+      "navTitle": "Workflows",
+      "description": "Adios API reference for workflows: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/domains.md",
+      "route": "/docs/api/domains",
+      "title": "Domains API",
+      "navTitle": "Domains",
+      "description": "Adios API reference for domains: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/object-storage.md",
+      "route": "/docs/api/object-storage",
+      "title": "Object storage API",
+      "navTitle": "Object storage",
+      "description": "Adios API reference for object storage: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/gateway-routes.md",
+      "route": "/docs/api/gateway-routes",
+      "title": "Gateway routes API",
+      "navTitle": "Gateway routes",
+      "description": "Adios API reference for gateway routes: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/gateway-security.md",
+      "route": "/docs/api/gateway-security",
+      "title": "Gateway security API",
+      "navTitle": "Gateway security",
+      "description": "Adios API reference for gateway security: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/agent-sessions.md",
+      "route": "/docs/api/agent-sessions",
+      "title": "Agent sessions API",
+      "navTitle": "Agent sessions",
+      "description": "Adios API reference for agent sessions: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/agent-runs.md",
+      "route": "/docs/api/agent-runs",
+      "title": "Agent runs API",
+      "navTitle": "Agent runs",
+      "description": "Adios API reference for agent runs: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/agent-messages.md",
+      "route": "/docs/api/agent-messages",
+      "title": "Agent messages API",
+      "navTitle": "Agent messages",
+      "description": "Adios API reference for agent messages: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/agent-plans.md",
+      "route": "/docs/api/agent-plans",
+      "title": "Agent plans API",
+      "navTitle": "Agent plans",
+      "description": "Adios API reference for agent plans: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/agent-events.md",
+      "route": "/docs/api/agent-events",
+      "title": "Agent events API",
+      "navTitle": "Agent events",
+      "description": "Adios API reference for agent events: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/feature-planning.md",
+      "route": "/docs/api/feature-planning",
+      "title": "Feature planning API",
+      "navTitle": "Feature planning",
+      "description": "Adios API reference for feature planning: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/webhooks.md",
+      "route": "/docs/api/webhooks",
+      "title": "Webhooks API",
+      "navTitle": "Webhooks",
+      "description": "Adios API reference for webhooks: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/health-and-context.md",
+      "route": "/docs/api/health-and-context",
+      "title": "Quick start API",
+      "navTitle": "Quick start",
+      "description": "Adios API reference for quick start: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/billing.md",
+      "route": "/docs/api/billing",
+      "title": "Billing API",
+      "navTitle": "Billing",
+      "description": "Adios API reference for billing: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/ai-models.md",
+      "route": "/docs/api/ai-models",
+      "title": "AI models API",
+      "navTitle": "AI models",
+      "description": "Adios API reference for ai models: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/integrations.md",
+      "route": "/docs/api/integrations",
+      "title": "Integrations API",
+      "navTitle": "Integrations",
+      "description": "Adios API reference for integrations: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    },
+    {
+      "path": "api/mcp-discovery.md",
+      "route": "/docs/api/mcp-discovery",
+      "title": "MCP discovery API",
+      "navTitle": "MCP discovery",
+      "description": "Adios API reference for mcp discovery: endpoints, parameters, request examples, and published response contracts.",
+      "apiGenerated": true
+    }
+  ],
+  "sections": [
+    {
+      "title": "Getting started",
+      "items": [
+        "/docs",
+        "/docs/accounts",
+        "/docs/installation",
+        "/docs/quickstart",
+        "/docs/templates"
+      ]
+    },
+    {
+      "title": "Platform",
+      "items": [
+        "/docs/workspaces",
+        "/docs/ai",
+        "/docs/deployments",
+        "/docs/manifest",
+        "/docs/managed-resources",
+        "/docs/secrets",
+        "/docs/routing",
+        "/docs/storage",
+        "/docs/workflows",
+        "/docs/observability",
+        "/docs/billing",
+        "/docs/integrations",
+        "/docs/architecture"
+      ]
+    },
+    {
+      "title": "Developer reference",
+      "items": [
+        "/docs/cli",
+        "/docs/private-git-dependencies"
+      ]
+    },
+    {
+      "title": "Runtimes",
+      "items": [
+        "/docs/examples/nextjs",
+        "/docs/examples/python",
+        "/docs/examples/go",
+        "/docs/examples/ruby",
+        "/docs/examples/dotnet"
+      ]
+    },
+    {
+      "title": "Databases and services",
+      "items": [
+        "/docs/examples/postgres",
+        "/docs/examples/mysql",
+        "/docs/examples/mongodb",
+        "/docs/examples/redis",
+        "/docs/examples/rabbitmq"
+      ]
+    },
+    {
+      "title": "Application guides",
+      "items": [
+        "/docs/guides",
+        "/docs/guides/realtime-analytics-node-redis-mongodb",
+        "/docs/guides/semantic-search-fastapi-pgvector",
+        "/docs/guides/global-webhook-processor-go",
+        "/docs/guides/php-markdown-docs-edge-cache",
+        "/docs/guides/dotnet-redis-crypto-ticker"
+      ]
+    },
+    {
+      "title": "API essentials",
+      "items": [
+        "/docs/api",
+        "/docs/api/authentication",
+        "/docs/api/quickstart",
+        "/docs/api/postman",
+        "/docs/api/errors"
+      ]
+    },
+    {
+      "title": "API reference",
+      "items": [
+        "/docs/api/teams",
+        "/docs/api/workloads",
+        "/docs/api/workspaces",
+        "/docs/api/workspace-sources",
+        "/docs/api/source-artifacts",
+        "/docs/api/workflows",
+        "/docs/api/domains",
+        "/docs/api/object-storage",
+        "/docs/api/gateway-routes",
+        "/docs/api/gateway-security",
+        "/docs/api/agent-sessions",
+        "/docs/api/agent-runs",
+        "/docs/api/agent-messages",
+        "/docs/api/agent-plans",
+        "/docs/api/agent-events",
+        "/docs/api/feature-planning",
+        "/docs/api/webhooks",
+        "/docs/api/health-and-context",
+        "/docs/api/billing",
+        "/docs/api/ai-models",
+        "/docs/api/integrations",
+        "/docs/api/mcp-discovery"
+      ]
+    }
+  ]
+}

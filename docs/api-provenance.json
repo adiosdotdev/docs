@@ -1,0 +1,15 @@
+{
+  "source": "api/schema.yaml + api/custom \u2192 api/src/openapi.yaml + api/postman/catalog.yaml",
+  "inputs": {
+    "src/openapi.yaml": "2ca201fa9114d997c4cf99b71c2fefba35ecfdad1f4c8ce307c517dff5766444",
+    "postman/catalog.yaml": "d522455dc407f8d12d8a9d49f1f6eba16439a50207b2bf87bcc68e29be663c46",
+    "postman/generate.py": "1966630e55cf07f1dded7126293e858a26f8b2ef0552c942866d17de709aca1a",
+    "postman/overview.md": "3eb9548dde4b35201dbfa415a3c10b92c6c8f887801ef250f1aa56908cf901ee",
+    "postman/mcp-overview.md": "9d956093881d27f626818d6630f98a30cf01102d0a7cfd1494e8a013e9425e6e"
+  },
+  "coreOperations": 140,
+  "discoveryOperations": 4,
+  "publicOperations": 144,
+  "groups": 22,
+  "omittedInvalidDefaults": 6
+}

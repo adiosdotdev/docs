@@ -1,0 +1,60 @@
+INHERIT: docs/nav.yml
+site_name: Adios documentation
+site_description: User guides and API reference for the Adios platform.
+site_url: !ENV [READTHEDOCS_CANONICAL_URL, "https://adios.dev/docs/"]
+docs_dir: docs/content
+site_dir: output/docs/site
+use_directory_urls: true
+strict: true
+theme:
+  name: material
+  font: false
+  logo: assets/adios-logo.svg
+  favicon: assets/favicon.svg
+  palette:
+    - scheme: default
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+extra_css:
+  - assets/docs.css
+extra_javascript:
+  - assets/readthedocs.js
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://adios.dev
+      name: Adios
+    - icon: fontawesome/solid/terminal
+      link: https://app.adios.dev
+      name: Dashboard
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+    absolute_links: warn

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "adios": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@adiosdotdev/mcp"
+      ]
+    }
+  }
+}

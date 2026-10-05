@@ -1,0 +1,151 @@
+{
+  "info": {
+    "_postman_id": "5a2bc5f1-2ccb-5efa-8308-fa10423dd07e",
+    "name": "Adios.dev MCP — Public discovery",
+    "description": "# Adios.dev MCP\n\nConnect AI clients to Adios workspaces, source files, previews, builds, logs, and\ndeployments through the hosted Model Context Protocol server.\n\n| Setting | Value |\n| --- | --- |\n| Transport | Streamable HTTP |\n| Server URL | `https://api.adios.dev/v1/mcp` |\n| Authentication | OAuth authorization code with PKCE (S256) |\n| Scopes | `openid profile email mcp` |\n| OAuth resource | `https://api.adios.dev/v1/mcp` |\n| Product documentation | [Adios MCP](https://www.adios.dev/mcp) |\n| Source and client packages | [adiosdotdev/mcp](https://github.com/adiosdotdev/mcp) |\n\n## Connect in Postman\n\nCreate a native **MCP** request, choose **HTTP**, and enter the server URL above.\nSet `X-Adios-MCP-Eager-OAuth: true` in its headers to require sign-in when loading\ncapabilities. Select OAuth authorization, connect, and follow Postman's OAuth\nDebugger through discovery, client registration, PKCE, and browser consent.\nSave the request in a collection named **Adios.dev MCP Server**.\nSee [Postman's MCP request guide](https://learning.postman.com/docs/use/send-requests/protocols/mcp-requests/create)\nand [OAuth Debugger guide](https://learning.postman.com/docs/use/send-requests/protocols/mcp-requests/oauth-debugger).\n\nThe downloadable HTTP configuration can also be pasted into Postman's MCP\nrequest setup. Direct OAuth requires the API release that allows Postman's\ndesktop and browser callback URLs. Until that release is deployed, use the\nexisting STDIO bridge in the Postman desktop app:\n\n```sh\nnpx -y @adiosdotdev/mcp\n```\n\nChoose **STDIO** and enter that command, or paste the supplied STDIO configuration.\nThe bridge requires Node.js 20.18.1 or later and npm; it connects to the hosted\nservice and opens browser OAuth. It does not run the Adios platform locally.\n\n## Try a tool\n\nAfter signing in, load capabilities and select `list_workspaces` with your team ID:\n\n```json\n{\"team_id\": \"YOUR_TEAM_ID\", \"limit\": 10, \"offset\": 0}\n```\n\nUse the live tool schema to fill in arguments. Each call is checked against your\nAdios user and team permissions. Other tools can change files, run builds,\ndeploy applications, or stop runtimes; review their arguments before calling.\nKeep account-specific tool responses and OAuth tokens private.\n\nMCP access tokens have the `mcp` scope and MCP resource audience. The REST\ncollection's `adios auth print-token` diagnostic tokens do **not** authenticate\nMCP tool calls. Conversely, MCP tokens are not general REST API credentials.\n\n## Public discovery collection\n\nThe accompanying **Adios.dev MCP — Public discovery** collection uses ordinary\nHTTP requests to inspect connection metadata, public tool schemas, and OAuth\ndiscovery documents. It needs no token, does not invoke tools, and can run on its\nown. Native MCP interaction is provided by the saved MCP request in Postman;\nthe discovery collection is not a native MCP collection export.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.adios.dev",
+      "type": "string",
+      "description": "Public API origin without a trailing slash."
+    }
+  ],
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test('Public MCP discovery succeeds', function () {",
+          "  pm.expect(pm.response.code).to.equal(200);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "id": "1bf9eaf5-1887-5329-90a3-c10b16de70ea",
+      "name": "Get MCP connection configuration",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/mcp/config",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "mcp",
+            "config"
+          ]
+        },
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "Read supported transports, connection URLs, and OAuth settings."
+      },
+      "response": []
+    },
+    {
+      "id": "8a4f7550-e422-5eee-b1ec-0b70a6e4b7c7",
+      "name": "Discover MCP tools",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/v1/mcp/tools",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v1",
+            "mcp",
+            "tools"
+          ]
+        },
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "Read public tool names and input schemas. This does not execute any tools."
+      },
+      "response": []
+    },
+    {
+      "id": "4067bdd3-dea8-5d76-830a-90d2c28c1e92",
+      "name": "Get MCP protected resource metadata",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/.well-known/oauth-protected-resource/v1/mcp",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            ".well-known",
+            "oauth-protected-resource",
+            "v1",
+            "mcp"
+          ]
+        },
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "Read the MCP resource identifier, authorization server, and supported scopes."
+      },
+      "response": []
+    },
+    {
+      "id": "b66f160c-68c9-5627-beab-3331821a0590",
+      "name": "Get OAuth authorization server metadata",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/.well-known/oauth-authorization-server",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            ".well-known",
+            "oauth-authorization-server"
+          ]
+        },
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "Read OAuth discovery metadata, including authorization, registration, and token endpoints."
+      },
+      "response": []
+    }
+  ]
+}

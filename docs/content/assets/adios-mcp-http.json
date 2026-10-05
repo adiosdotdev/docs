@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "adios": {
+      "type": "http",
+      "url": "https://api.adios.dev/v1/mcp",
+      "headers": {
+        "X-Adios-MCP-Eager-OAuth": "true"
+      }
+    }
+  }
+}

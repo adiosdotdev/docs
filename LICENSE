@@ -1,0 +1,24 @@
+Adios documentation licensing
+Copyright (c) 2026 Adios contributors
+
+Documentation prose, including Markdown guides, README files and API reference
+descriptions, is licensed under the Creative Commons Attribution 4.0
+International license (CC BY 4.0). See LICENSES/CC-BY-4.0.txt and
+https://creativecommons.org/licenses/by/4.0/.
+
+Code examples embedded in the documentation, OpenAPI specifications, Postman
+collections and connection configurations, scripts, stylesheets, and build
+configuration are licensed under the MIT License. See LICENSES/MIT.txt.
+The MIT grant includes API descriptions embedded in machine-readable OpenAPI
+and Postman files so those files can be reused as a whole.
+
+For attribution, identify Adios and link to https://github.com/adiosdotdev/docs
+or https://adios.dev/docs/. Retain the applicable license notices and indicate
+changes as required by the applicable license.
+
+The Adios logo and favicon SVG files are excluded from these license grants;
+all rights in those brand assets are reserved. No trademark rights in the
+Adios name or logos are granted.
+
+These licenses apply to the materials in the public documentation repository.
+They do not license the Adios platform implementation or other repositories.

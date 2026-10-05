@@ -1,0 +1,2 @@
+# Validation tooling; not needed for Read the Docs hosting.
+openapi-spec-validator==0.8.4
