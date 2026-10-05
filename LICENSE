@@ -20,5 +20,6 @@ The Adios logo and favicon SVG files are excluded from these license grants;
 all rights in those brand assets are reserved. No trademark rights in the
 Adios name or logos are granted.
 
-These licenses apply to the materials in the public documentation repository.
-They do not license the Adios platform implementation or other repositories.
+These licenses apply to the materials in the public documentation repository,
+including the same documentation published at adios.dev/docs and on Read the
+Docs. They do not license the Adios platform implementation or other repositories.

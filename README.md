@@ -70,3 +70,5 @@ Documentation prose is licensed under [CC BY 4.0](LICENSES/CC-BY-4.0.txt).
 Code examples, OpenAPI and Postman files, and build tooling are licensed under
 [MIT](LICENSES/MIT.txt). The Adios name, logo and favicon are excluded from the
 license grants. See [LICENSE](LICENSE) for the scope and attribution details.
+The same licenses apply to these docs on adios.dev/docs and Read the Docs.
+The Adios platform is governed separately by its own terms and licenses.
