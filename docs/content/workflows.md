@@ -75,30 +75,66 @@ steps:
 Replace `team-local` with your team ID, configure the API endpoints, and create
 `MARKET_DATA_API_KEY` in Adios secrets before deploying this example. Its source
 API expects an `X-API-Key` header; its destination receives the selected quotes
-as JSON. The schedule repeats every 24 hours. Remove `triggers` for a manual-only
-test before enabling recurring delivery.
+as JSON. The schedule runs once a day at 00:00 UTC. Remove `triggers` for a
+manual-only test before enabling recurring delivery.
 
 ## Triggers and scheduling {#triggers}
 
-- **Manual:** omit `triggers` and start a run from Workflows.
+- **Manual:** start a run from Workflows or with `adios workflow run`. A
+  workflow with no `triggers` only runs this way.
 - **Webhook:** use `type: webhook` and an event name, such as `order.created`.
   The incoming event payload is available as `.payload`.
 - **Event:** use `type: event` and the internal event name to match.
-- **Interval:** use `type: schedule` with a positive duration such as
-  `interval: 1h` or `interval: 24h`.
-- **Cron:** the current scheduler supports `@every 1h`, `* * * * *`, and minute
-  intervals such as `*/5 * * * *`. It does not evaluate general calendar cron
-  expressions such as `0 8 * * *`.
+- **Cron:** use `type: cron` with a five-field expression such as
+  `cron: "0 8 * * 1-5"`. Add `timezone: Europe/Berlin` to run at a local time;
+  without it, cron uses UTC.
+- **Interval:** use `type: schedule` with a duration such as `interval: 1h` or
+  `interval: 24h`. `cron: "@every 1h"` is the same as `interval: 1h`.
 
-Intervals measure elapsed time; they are not aligned to a wall-clock time. A
-newly observed schedule can run on the next scheduler check, and restarting the
-scheduler resets its in-memory interval tracking. Although `timezone` and
-`concurrency` are accepted manifest fields, the current scheduler does not apply
-them. Do not rely on `concurrency: forbid` to prevent overlapping runs.
+```yaml
+triggers:
+  - type: cron
+    cron: "0 8 * * 1-5"
+    timezone: Europe/Berlin
+    concurrency: forbid
+```
 
-For a fixed local time, use an external scheduler to send a webhook. If a repeat
-could send duplicate reports or writes, implement deduplication in your
-application or destination.
+Intervals line up with UTC boundaries, so `interval: 24h` runs once a day at
+00:00 UTC, not 24 hours after you deploy. Use cron with a `timezone` when you
+need a specific local time. The scheduler checks for due slots about every
+30 seconds. Slots missed while the scheduler was down are skipped, not replayed.
+
+Set `concurrency: forbid` to skip a scheduled slot while an earlier event from
+the same trigger is still pending or a run is waiting for approval. The skipped
+slot is recorded as a skipped event. If a repeated run could still send
+duplicate reports or writes, deduplicate in your application or destination.
+
+### Public webhook endpoints {#public-webhooks}
+
+Set `public: true` on a `webhook` or `event` trigger to receive HTTP requests
+from outside Adios:
+
+```yaml
+triggers:
+  - type: webhook
+    event: order.created
+    public: true
+    public_path_pattern: /hooks/orders/{order_id}
+    public_methods: [POST]
+    public_hosts: [api.example.com]
+    public_secret_ref: secret://ORDER_WEBHOOK_SECRET
+    response_mode: queued_json
+```
+
+- `public_path_pattern` is required. Segments in braces, such as `{order_id}`,
+  are captured as path parameters.
+- `public_methods` and `public_hosts` limit which requests match. Leave them
+  out to accept any method or host.
+- `public_secret_ref` makes the caller send the secret value in the
+  `X-Workflow-Secret` header. Requests without the matching value are rejected.
+- `response_mode` sets the reply. `queued_json` (the default) and `async_json`
+  answer right away. `sync_json` and `sync_html` wait for the run and return its
+  output.
 
 ## All ten supported actions {#actions}
 
@@ -272,13 +308,20 @@ trigger payload, request data, and previous step outputs.
 
 ## Create and inspect a run {#create}
 
-Create or apply this manifest from the workflow builder, the AI agent, or the
-workflow CLI. The local CLI runner is useful for simple development checks, but
-it supports a subset of platform step kinds.
+Create or update this manifest from the workflow builder, the AI agent, or the
+workflow CLI:
 
 ```bash
-adios workflow deploy ./workflows/daily-market-brief.yaml
+adios workflow push "Daily market brief" ./workflows/daily-market-brief.yaml --create
+adios workflow run "Daily market brief"
+adios workflow runs --workflow "Daily market brief"
+adios workflow logs "Daily market brief"
 ```
+
+Leave out `--create` to update a workflow that already exists. Use
+`adios workflow validate` to check a manifest before pushing it, and
+`adios workflow run --local` for quick checks on your machine. The local runner
+supports only a subset of platform step kinds.
 
 Start with a manual run and sample inputs. Inspect each step's status, output,
 and error in Workflows before connecting a live event source or recurring

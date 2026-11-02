@@ -16,7 +16,8 @@ name: dashboard
 region: de
 replicas: 1
 
-build_cmd: pnpm install --frozen-lockfile && pnpm build
+dependency_cmd: pnpm install --frozen-lockfile
+build_cmd: pnpm build
 start_cmd: pnpm start
 
 runtime:

@@ -113,18 +113,26 @@ preview URL for the active workspace replica.
 
 ## Workflows
 
-### `adios workflow run <manifest.yaml>`
-Run a workflow manifest locally for simple development checks. The local runner
-supports a subset of platform step kinds.
+### `adios workflow list`
+List your team's workflows. `adios workflow show <workflow>` prints one.
 
-### `adios workflow deploy <manifest.yaml>`
-Deploy a workflow manifest to the Adios platform.
+### `adios workflow push <workflow> <file>`
+Upload a manifest to an existing workflow. Add `--create` to create a new
+workflow with that name. `adios workflow pull <workflow> <file>` downloads the
+current manifest.
 
-### `adios workflow worker`
-Start a local workflow worker connected to RabbitMQ.
+### `adios workflow validate <file>`
+Check a manifest before you push it.
 
-### `adios workflow event publish <event-name>`
-Publish a workflow event with an optional JSON payload.
+### `adios workflow run <workflow>`
+Start a run on the platform. Pass input with `--input '{"key":"value"}'`. Add
+`--local <manifest.yaml>` instead to run a manifest on your machine; the local
+runner supports a subset of platform step kinds.
+
+### `adios workflow runs`
+List recent runs. Filter with `--workflow <workflow>`. Read a run's step output
+with `adios workflow logs <run-id|workflow>`, and stop one with
+`adios workflow cancel <run-id>`.
 
 Workflow manifests define `workflow_id`, `title`, `triggers`, `steps`, and
 secret references. See [Workflows](workflows.md) for a complete YAML

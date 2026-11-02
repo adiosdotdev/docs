@@ -35,7 +35,7 @@ region: de
 replicas: 1
 routable: true
 
-build_cmd: npm ci
+dependency_cmd: npm ci
 start_cmd: node server.js
 
 runtime:

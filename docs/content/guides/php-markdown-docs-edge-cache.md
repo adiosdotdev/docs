@@ -34,6 +34,7 @@ region: de
 replicas: 1
 routable: true
 
+dependency_cmd: composer install --no-dev --prefer-dist --no-interaction --no-scripts --no-autoloader
 build_cmd: composer install --no-dev --optimize-autoloader
 start_cmd: php -S 0.0.0.0:$PORT public/index.php
 

@@ -13,7 +13,7 @@ Create an `adios.yaml` file in the root of your project:
 
 ```yaml
 name: my-flask-api
-build_cmd: pip install -r requirements.txt
+dependency_cmd: python -m pip install -r requirements.txt
 start_cmd: gunicorn app:app --bind 0.0.0.0:$PORT
 
 runtime:

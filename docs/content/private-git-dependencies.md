@@ -100,8 +100,8 @@ build_cmd: |-
 
 `build.ssh` makes the key available only to the build. Adios resolves the
 secret inside the worker and removes the temporary private-key file when the
-build finishes. For native `build_cmd` builds, the worker also prepares SSH for
-the supported Git hosts. The key is not added to the running application's
+build finishes. For native builds, the worker also prepares SSH for the supported Git
+hosts before `dependency_cmd` and `build_cmd` run. The key is not added to the running application's
 environment or filesystem. Docker builds must consume the SSH mount as shown
 below.
 

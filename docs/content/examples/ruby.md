@@ -12,7 +12,7 @@ Create an `adios.yaml` file in the root of your project:
 
 ```yaml
 name: my-ruby-app
-build_cmd: bundle install
+dependency_cmd: BUNDLE_FROZEN=true bundle install
 start_cmd: bundle exec ruby app.rb
 
 runtime:

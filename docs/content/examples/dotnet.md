@@ -12,6 +12,7 @@ Create an `adios.yaml` file in the root of your project:
 
 ```yaml
 name: my-dotnet-api
+dependency_cmd: dotnet restore
 build_cmd: dotnet publish -c Release -o out
 start_cmd: dotnet out/MyApp.dll
 

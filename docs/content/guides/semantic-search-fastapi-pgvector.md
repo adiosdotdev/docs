@@ -33,7 +33,7 @@ name: semantic-search
 region: de
 replicas: 1
 
-build_cmd: python -m pip install -r requirements.txt
+dependency_cmd: python -m pip install -r requirements.txt
 start_cmd: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
 runtime:

@@ -12,6 +12,7 @@ Create an `adios.yaml` file in the root of your project:
 
 ```yaml
 name: my-go-api
+dependency_cmd: go mod download
 build_cmd: go build -o main .
 start_cmd: ./main
 

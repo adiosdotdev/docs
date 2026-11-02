@@ -14,7 +14,8 @@ region: de
 replicas: 2
 routable: true
 
-build_cmd: pnpm install && pnpm build
+dependency_cmd: pnpm install --frozen-lockfile
+build_cmd: pnpm build
 start_cmd: pnpm start
 
 runtime:
@@ -61,9 +62,12 @@ string, and treats a bare destination host as HTTPS. For example,
 
 1. Add the custom host in the Adios dashboard or manifest.
 2. Point DNS for the hostname to the Adios-provided target.
-3. Wait for domain verification.
-4. Deploy or redeploy the runtime.
-5. Confirm the route with `adios domains list` and `adios ingress list`.
+3. Add the verification record Adios shows you: a CNAME at
+   `_adios-challenge.<hostname>` that points to a generated `*.verify.` value.
+4. Run `adios domains verify <hostname>`, or wait for the dashboard to show the
+   domain as verified. TLS is issued once the domain is verified and routed.
+5. Deploy or redeploy the runtime.
+6. Confirm the route with `adios domains list` and `adios ingress list`.
 
 ## Runtime Notes
 

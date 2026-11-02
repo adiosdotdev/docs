@@ -40,7 +40,8 @@ name: my-nextjs-app
 region: de
 replicas: 1
 
-build_cmd: npm ci && npm run build
+dependency_cmd: npm ci --include=dev
+build_cmd: npm run build
 start_cmd: npm start
 
 runtime:
@@ -54,7 +55,8 @@ Keep the package manager and lockfile your project already uses. For pnpm,
 replace the command fields with the equivalent pnpm commands:
 
 ```yaml
-build_cmd: pnpm install --frozen-lockfile && pnpm build
+dependency_cmd: pnpm install --frozen-lockfile
+build_cmd: pnpm build
 start_cmd: pnpm start
 ```
 

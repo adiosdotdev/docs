@@ -37,7 +37,8 @@ URLs permanently redirect to the corresponding deployment page.
 - **Go API:** Gin, Chi, Echo, Fiber, and Beego starters.
 - **.NET apps and APIs:** ASP.NET Core, FastEndpoints, Blazor, ABP Framework, Orchard Core, and .NET 8 starters.
 - **Data and search services:** PostgreSQL, pgvector, MongoDB, MySQL, Redis,
-  RabbitMQ, Typesense, and Qdrant.
+  RabbitMQ, Typesense, and Qdrant. Typesense and Qdrant run as regular apps with
+  a persistent volume, not as managed resources in `resources:`.
 
 ## Web Console
 
@@ -50,8 +51,8 @@ Use the console when you want the shortest path from a template to a live app.
 5. Review the template, region, resources, and deploy policy.
 6. Create the app and follow the deployment logs.
 
-Template links include a `template` query value so the console can preselect the
-right starter after authentication.
+**Deploy now** opens app creation in the console. If the starter isn't already
+selected there, search for it by name before you create the app.
 
 ## Local Clone
 

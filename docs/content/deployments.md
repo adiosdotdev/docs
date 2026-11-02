@@ -39,7 +39,9 @@ credentials, persistence, and connections.
 
 Make the application listen on the configured port and a network-accessible
 interface. The `health_path` must respond as expected without an interactive
-login. Select a region available to your team; don't assume every runtime or
+login. If you don't set one, Adios checks `/`, so the root page must load
+without a login too. Managed database, cache, and queue services use a TCP
+check on their port. Select a region available to your team; don't assume every runtime or
 resource is available in every region.
 
 Increasing `replicas` creates more runtime instances. Persistent local state

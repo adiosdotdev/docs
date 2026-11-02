@@ -12,8 +12,10 @@ Create a remote Streamable HTTP connection using:
 https://api.adios.dev/v1/mcp
 ```
 
-Let the client complete Adios OAuth in the browser. Select the intended account
-and team and review the requested access. MCP uses authorization code with PKCE;
+Let the client complete Adios OAuth in the browser. Sign in with the intended
+account and review the requested access. The connection acts as you and can
+reach the teams your account belongs to; each tool call names the team it
+works on. MCP uses authorization code with PKCE;
 its tokens are scoped to MCP and cannot replace a general REST bearer token.
 
 Clients that start a local stdio command can use the published bridge, which

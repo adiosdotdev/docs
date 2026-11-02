@@ -23,6 +23,18 @@ adios secrets set BUILD_DEPLOY_KEY --from-file ~/.ssh/adios-build
 Add `--team YOUR_TEAM_ID` when you need an explicit target. Before deleting or
 replacing a secret, check which applications and workflows use it.
 
+## Where secrets live and who can see them
+
+Secrets belong to a team and are stored in a region. By default that is the
+team's home region. Add `--region` to `adios secrets set`, `list`, or `get` to
+work with another region, and create the secret in each region where an app or
+workflow that uses it runs.
+
+Values are kept out of your repository, manifests, and logs, but they are not
+hidden from your team. Team members with access can reveal a value in the
+dashboard or with `adios secrets get NAME --show-value`. Share team access
+only with people who should be able to read its credentials.
+
 ## Reference values in adios.yaml
 
 ```yaml

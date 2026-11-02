@@ -10,6 +10,7 @@ name: api
 region: de
 replicas: 2
 
+dependency_cmd: go mod download
 build_cmd: go build -o /app/api .
 start_cmd: /app/api
 
@@ -22,11 +23,67 @@ runtime:
   health_path: /healthz
 ```
 
+`health_path` is optional. If you leave it out, Adios checks `/` over HTTP on
+the runtime port. Managed database, cache, and queue services use a TCP check
+on their port instead.
+
 Command fields are scalar shell commands:
 
 ```yaml
-build_cmd: pnpm install && pnpm build
+dependency_cmd: pnpm install --frozen-lockfile
+build_cmd: pnpm build
 ```
+
+### Dependencies and build
+
+Put package installation in `dependency_cmd` and compilation in `build_cmd`.
+Adios runs `dependency_cmd` first, in a separate step that only sees your
+dependency files, such as `package.json` and its lockfile, `requirements.txt`,
+`go.mod`, or `composer.lock`. When those files, the runtime, the command, and
+the build environment haven't changed, the next build reuses the installed
+packages and goes straight to `build_cmd`.
+
+Common commands:
+
+| Stack | `dependency_cmd` |
+|---|---|
+| npm | `npm ci` (add `--include=dev` if the build needs dev dependencies) |
+| pnpm | `pnpm install --frozen-lockfile` |
+| pip | `python -m pip install -r requirements.txt` |
+| Bundler | `BUNDLE_FROZEN=true bundle install` |
+| Composer | `composer install --no-dev --prefer-dist --no-interaction --no-scripts --no-autoloader` |
+| Go | `go mod download` |
+| .NET | `dotnet restore` |
+
+Packages installed only by `build_cmd` are not available when a workspace runs
+lint or test commands in a fresh runtime, so the workspace warns when
+`dependency_cmd` is missing.
+
+If your install step needs files other than the usual dependency files, list
+them in `build.dependency_files`. The list replaces automatic detection, so
+include the lockfile too. Projects whose install step depends on application
+source, such as Prisma generation, local path dependencies, or Composer
+scripts, get the full source automatically. Run `adios up --no-cache` to
+reinstall from scratch.
+
+### Edge caching and outbound traffic
+
+Next.js apps get edge caching for static assets and pages automatically. For
+other apps, turn on the gateway cache in `adios.yaml`:
+
+```yaml
+cache:
+  enabled: true
+  ttl_seconds: 300
+```
+
+The edge skips requests with an `Authorization` header and responses marked
+`no-store` or `private`, or that set cookies.
+
+Set `runtime.egress: none` to block a workload from reaching the internet, for
+example an internal worker that only talks to private services. Use
+`egress: internet` to allow it explicitly. Without the field, the platform
+default applies.
 
 ## Managed Resources
 
